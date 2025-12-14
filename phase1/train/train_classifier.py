@@ -29,7 +29,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 texts = [s[0] for s in samples]
 labels = torch.tensor([s[1] for s in samples]).to(DEVICE)
 
-tokenizer = SimpleTokenizer(texts)
+tokenizer = SimpleTokenizer(texts) #applied tokenizer
 encoded = [tokenizer.encode(t, MAX_LEN) for t in texts]
 inputs = torch.tensor(encoded).to(DEVICE)
 
@@ -56,7 +56,7 @@ for epoch in range(EPOCHS):
 
     optimizer.zero_grad()
     outputs = model(inputs)       # (B, C)
-    loss = criterion(outputs, labels)
+    loss = criterion(outputs, labels) #calculating loss
     loss.backward()
     optimizer.step()
 
