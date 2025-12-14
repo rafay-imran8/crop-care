@@ -2,67 +2,67 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import sys
-import os
+import sys, os
 
 # Add phase1 directory to Python path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PHASE1_DIR = os.path.abspath(os.path.join(CURRENT_DIR, ".."))
 sys.path.insert(0, PHASE1_DIR)
 
-from models.encoder_decoder import EncoderDecoderTransformer  # Seq2Seq model
+from models.encoder_decoder import EncoderDecoderTransformer
 from utils.plotting import plot_loss
 from data.checklist_pairs import samples  # [(paragraph, checklist), ...]
 
 # -------------------------
-# Decoder Tokenizer (embedded)
+# Decoder Tokenizer with PAD, SOS, EOS
 # -------------------------
 class Seq2SeqTokenizer:
     def __init__(self, texts):
+        self.pad = "<pad>"
         self.sos = "<sos>"
         self.eos = "<eos>"
+
         vocab = set()
         for t in texts:
             vocab.update(t.lower().split())
-        self.stoi = {self.sos:0, self.eos:1}
-        self.stoi.update({w:i+2 for i,w in enumerate(sorted(vocab))})
-        self.itos = {i:w for w,i in self.stoi.items()}
+
+        # Indices: 0=pad, 1=sos, 2=eos, 3+=words
+        self.stoi = {self.pad: 0, self.sos: 1, self.eos: 2}
+        self.stoi.update({w: i + 3 for i, w in enumerate(sorted(vocab))})
+        self.itos = {i: w for w, i in self.stoi.items()}
 
     def encode(self, text):
         return [self.stoi[self.sos]] + [self.stoi[w] for w in text.lower().split()] + [self.stoi[self.eos]]
 
     def decode(self, tokens):
-        return " ".join([self.itos[t] for t in tokens if t > 1])
+        return " ".join([self.itos[t] for t in tokens if t > 2])
 
 # -------------------------
-# Encoder tokenizer (existing)
+# Prepare Data
 # -------------------------
-from utils.tokenizer import SimpleTokenizer
-
-MAX_LEN = 32
-
 encoder_texts = [p[0] for p in samples]
 decoder_texts = [p[1] for p in samples]
+
+from utils.tokenizer import SimpleTokenizer
+MAX_LEN = 32
 
 enc_tokenizer = SimpleTokenizer(encoder_texts)
 dec_tokenizer = Seq2SeqTokenizer(decoder_texts)
 
-# -------------------------
 # Encode encoder inputs
-# -------------------------
 enc_inputs = torch.tensor([enc_tokenizer.encode(t, MAX_LEN) for t in encoder_texts])
 
-# -------------------------
-# Encode decoder inputs and targets with padding
-# -------------------------
+# Encode decoder inputs and targets
 dec_encoded = [dec_tokenizer.encode(t) for t in decoder_texts]
 dec_max_len = max(len(seq) for seq in dec_encoded)
 
-# inputs: remove last token (<eos>), pad to max length
-dec_inputs = [seq[:-1] + [0]*(dec_max_len - len(seq)) for seq in dec_encoded]
-# targets: remove first token (<sos>), pad to max length
-dec_targets = [seq[1:] + [0]*(dec_max_len - len(seq)) for seq in dec_encoded]
+# Decoder inputs: remove <eos>, pad
+dec_inputs = [seq[:-1] + [dec_tokenizer.stoi["<pad>"]] * (dec_max_len - len(seq)) for seq in dec_encoded]
 
+# Decoder targets: remove <sos>, pad
+dec_targets = [seq[1:] + [dec_tokenizer.stoi["<pad>"]] * (dec_max_len - len(seq)) for seq in dec_encoded]
+
+# Convert to tensors
 dec_inputs = torch.tensor(dec_inputs)
 dec_targets = torch.tensor(dec_targets)
 
@@ -82,8 +82,11 @@ model = EncoderDecoderTransformer(
 ).to(device)
 
 enc_inputs, dec_inputs, dec_targets = enc_inputs.to(device), dec_inputs.to(device), dec_targets.to(device)
-
-criterion = nn.CrossEntropyLoss(ignore_index=0)  # ignore padding
+print(enc_inputs)
+print(dec_inputs)
+print(dec_targets)
+# Loss ignores padding
+criterion = nn.CrossEntropyLoss(ignore_index=dec_tokenizer.stoi["<pad>"])
 optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
 # -------------------------
@@ -124,6 +127,10 @@ with torch.no_grad():
 
 print("\nGenerated checklist:")
 print(dec_tokenizer.decode(generated[0].tolist()))
+
+# -------------------------
+# Generate for unseen paragraphs
+# -------------------------
 unseen_paragraphs = [
     "timely irrigation improves maize growth and prevents drought stress",
     "aphids and locusts damage wheat and maize crops during summer",
@@ -132,22 +139,16 @@ unseen_paragraphs = [
 
 print("\n--- Generating checklists for unseen paragraphs ---")
 for para in unseen_paragraphs:
-    # Tokenize encoder input (same tokenizer as training)
     enc_input = torch.tensor([enc_tokenizer.encode(para, MAX_LEN)], device=device)
-    
-    # Start with <sos> token for decoder
     generated = torch.tensor([[dec_tokenizer.stoi["<sos>"]]], device=device)
-    
-    # Generate tokens auto-regressively
+
     with torch.no_grad():
-        for _ in range(25):  # max 25 tokens
+        for _ in range(25):
             logits = model(enc_input, generated)
             next_token = torch.argmax(logits[:, -1, :], dim=-1)
             if next_token.item() == dec_tokenizer.stoi["<eos>"]:
                 break
             generated = torch.cat([generated, next_token.unsqueeze(1)], dim=1)
-    
-    # Decode generated tokens
-    checklist = dec_tokenizer.decode(generated[0].tolist())
+
     print(f"\nParagraph: {para}")
-    print(f"Generated checklist: {checklist}")
+    print(f"Generated checklist: {dec_tokenizer.decode(generated[0].tolist())}")
