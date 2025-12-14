@@ -44,7 +44,7 @@ encoder_texts = [p[0] for p in samples]
 decoder_texts = [p[1] for p in samples]
 
 from utils.tokenizer import SimpleTokenizer
-MAX_LEN = 32
+MAX_LEN = 12 # max length for encoder inputs
 
 enc_tokenizer = SimpleTokenizer(encoder_texts)
 dec_tokenizer = Seq2SeqTokenizer(decoder_texts)
