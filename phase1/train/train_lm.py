@@ -118,7 +118,8 @@ plot_loss(losses)
 # -------------------------
 model.eval()
 
-generated = torch.tensor([[tokenizer.stoi["wheat"]]], device=device)
+start_text = "agriculture helps"
+generated = torch.tensor([tokenizer.encode(start_text)[:-1]], device=device)
 
 for _ in range(25):
     with torch.no_grad():
