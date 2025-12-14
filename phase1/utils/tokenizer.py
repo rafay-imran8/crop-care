@@ -11,6 +11,6 @@ class SimpleTokenizer:
 
     def encode(self, text, max_len):
         tokens = [self.stoi.get(w, 1) for w in text.lower().split()]
-        tokens = tokens[:max_len]
-        tokens += [0] * (max_len - len(tokens))
+        tokens = tokens[:max_len] #to get max length
+        tokens += [0] * (max_len - len(tokens)) #padding if we are not at max length
         return tokens
