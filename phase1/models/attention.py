@@ -31,3 +31,30 @@ class MultiHeadSelfAttention(nn.Module):
 
         out = out.transpose(1, 2).contiguous().view(B, T, D)
         return self.fc(out)
+class MultiHeadCrossAttention(nn.Module):
+    def __init__(self, d_model, heads):
+        super().__init__()
+        assert d_model % heads == 0
+        self.d_k = d_model // heads
+        self.heads = heads
+        self.q = nn.Linear(d_model, d_model)
+        self.kv = nn.Linear(d_model, d_model*2)
+        self.fc = nn.Linear(d_model, d_model)
+
+    def forward(self, query, key_value, mask=None):
+        B, T_q, D = query.shape
+        T_kv = key_value.shape[1]
+        k, v = self.kv(key_value).chunk(2, dim=-1)
+        q = self.q(query)
+
+        q = q.view(B, T_q, self.heads, self.d_k).transpose(1,2)
+        k = k.view(B, T_kv, self.heads, self.d_k).transpose(1,2)
+        v = v.view(B, T_kv, self.heads, self.d_k).transpose(1,2)
+
+        scores = (q @ k.transpose(-2,-1)) / (self.d_k ** 0.5)
+        if mask is not None:
+            scores = scores.masked_fill(mask==0, -1e9)
+        attn = torch.softmax(scores, dim=-1)
+        out = attn @ v
+        out = out.transpose(1,2).contiguous().view(B,T_q,D)
+        return self.fc(out)
