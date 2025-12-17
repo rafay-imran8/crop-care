@@ -1,4 +1,3 @@
-# phase1/utils/tokenizer.py
 class SimpleTokenizer:
     def __init__(self, texts):
         vocab = set()
@@ -6,11 +5,13 @@ class SimpleTokenizer:
             vocab.update(t.lower().split())
         self.stoi = {w: i+2 for i, w in enumerate(sorted(vocab))}
         self.stoi["<pad>"] = 0
+        # Setting the <unk> token for unseen words
         self.stoi["<unk>"] = 1
         self.itos = {i: w for w, i in self.stoi.items()}
 
     def encode(self, text, max_len):
         tokens = [self.stoi.get(w, 1) for w in text.lower().split()]
-        tokens = tokens[:max_len] #to get max length
-        tokens += [0] * (max_len - len(tokens)) #padding if we are not at max length
+        # To get max length
+        tokens = tokens[:max_len]
+        tokens += [0] * (max_len - len(tokens)) # Padding if we are not at max length
         return tokens

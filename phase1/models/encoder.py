@@ -17,6 +17,7 @@ class EncoderBlock(nn.Module):
 
     def forward(self, x):
         # x: (B, T, D)
+        #leads to layer norm
         x = self.norm1(x + self.attn(x))
         x = self.norm2(x + self.ff(x))
         return x
@@ -25,7 +26,8 @@ class EncoderBlock(nn.Module):
 class EncoderClassifier(nn.Module):
     def __init__(self, vocab_size, d_model=128, layers=2, heads=4, num_classes=4):
         super().__init__()
-        self.embedding = nn.Embedding(vocab_size, d_model) #embedding is being done here size of 128 per token
+        #embedding is being done here size of 128 per token
+        self.embedding = nn.Embedding(vocab_size, d_model)
         self.positional = PositionalEncoding(d_model, max_len=128)
 
         self.layers = nn.ModuleList([
@@ -44,6 +46,6 @@ class EncoderClassifier(nn.Module):
         for layer in self.layers:
             x = layer(x)
 
-        pooled = x.mean(dim=1)       # (B, D)
-        logits = self.classifier(pooled)  # (B, C)
+        pooled = x.mean(dim=1)       # (B, D), pooling is done
+        logits = self.classifier(pooled)  # (B, C) to determine label which is C for each batch
         return logits

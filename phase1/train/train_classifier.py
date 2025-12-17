@@ -32,7 +32,7 @@ labels = torch.tensor([s[1] for s in samples]).to(DEVICE)
 tokenizer = SimpleTokenizer(texts) #applied tokenizer
 encoded = [tokenizer.encode(t, MAX_LEN) for t in texts]
 inputs = torch.tensor(encoded).to(DEVICE)
-
+# print(inputs)
 # -------------------------
 # Model
 # -------------------------
@@ -53,7 +53,7 @@ losses = []
 
 for epoch in range(EPOCHS):
     model.train()
-
+    # print(inputs.shape)
     optimizer.zero_grad()
     outputs = model(inputs)       # (B, C)
     loss = criterion(outputs, labels) #calculating loss
@@ -79,4 +79,8 @@ for i, text in enumerate(texts):
 # -------------------------
 # Plot loss curve
 # -------------------------
+# Example of testing it on unseen data
+unseen_text = "The leaves are turning yellow and falling off"
+predicted_label=torch.argmax(model(torch.tensor([tokenizer.encode(unseen_text, MAX_LEN)]).to(DEVICE)), dim=1)
+print(f"\nUnseen Text Prediction:\n{unseen_text} → {label_map[predicted_label.item()]}")
 plot_loss(losses)
