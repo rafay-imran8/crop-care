@@ -29,7 +29,6 @@ class EncoderClassifier(nn.Module):
         #embedding is being done here size of 128 per token
         self.embedding = nn.Embedding(vocab_size, d_model)
         self.positional = PositionalEncoding(d_model, max_len=128)
-
         self.layers = nn.ModuleList([
             EncoderBlock(d_model, heads) for _ in range(layers)
         ])

@@ -67,7 +67,9 @@ for i in range(len(encoded) - MAX_LEN):
 
 inputs = torch.tensor(inputs)
 targets = torch.tensor(targets)
-print(inputs, targets)
+print(inputs)
+print("\n")
+print(targets)
 # -------------------------
 # #Model
 # -------------------------
@@ -124,7 +126,7 @@ generated = torch.tensor([tokenizer.encode(start_text)[:-1]], device=device)
 for _ in range(25):
     with torch.no_grad():
         logits = model(generated)
-        next_token = torch.argmax(logits[:, -1, :], dim=-1)
+        next_token = torch.argmax(logits[:, -1, :], dim=-1) # uses -1 to select last token only
 
     if next_token.item() == tokenizer.stoi["<eos>"]:
         break

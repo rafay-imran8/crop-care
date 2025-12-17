@@ -36,7 +36,6 @@ class TinyGPT(nn.Module):
 
         self.ln_f = nn.LayerNorm(d_model)
         self.fc = nn.Linear(d_model, vocab_size)
-
         self.max_len = max_len
 
     def forward(self, x):
@@ -50,7 +49,7 @@ class TinyGPT(nn.Module):
         # causal mask (shared across batch)
         mask = torch.tril(torch.ones(T, T, device=x.device))
         mask = mask.unsqueeze(0).unsqueeze(0)
-
+        # print(mask.shape)
         for block in self.blocks:
             x = block(x, mask)
 
