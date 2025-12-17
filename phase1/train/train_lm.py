@@ -89,7 +89,7 @@ encoded = tokenizer.encode(corpus)
 # -------------------------
 # Build Training Data
 # -------------------------
-MAX_LEN = 32
+MAX_LEN = 128
 inputs, targets = [], []
 
 for i in range(len(encoded) - MAX_LEN):
