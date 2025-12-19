@@ -16,7 +16,7 @@ CHUNKS_FILE = os.path.join(PROCESSED_DIR, "embed_store.json")
 QUERIES_FILE = os.path.join(EVAL_DIR, "queries.json")
 OUTPUT_FILE = os.path.join(EVAL_DIR, "retrieval_metrics.json")
 
-TOP_K = 1  # Top-k retrieval
+TOP_K = 5  # Top-k retrieval
 
 # -------------------------
 # Load chunks and queries
@@ -61,7 +61,7 @@ for q in queries:
     retrieved_docs = set([chunks[i]["metadata"]["source"] for i in topk_indices])
     num_relevant_retrieved = len(retrieved_docs & relevant_docs)
 
-    precision = num_relevant_retrieved / TOP_K
+    precision = num_relevant_retrieved / TOP_K # gives 0.2 due to less documents
     recall = num_relevant_retrieved / len(relevant_docs)
 
     # 5. Save result for this query
