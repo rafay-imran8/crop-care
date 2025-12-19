@@ -1,0 +1,354 @@
+[
+  {
+    "query": "symptoms of leaf rust in wheat",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "best irrigation schedule for maize",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "management of maize lethal necrosis disease",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ],
+    "relevant_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ]
+  },
+  {
+    "query": "how to prevent stem rust in wheat",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "recommended fertilizer application for maize",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "signs of leaf rust infection on wheat leaves",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "optimal planting dates for maize in temperate regions",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "cultural practices to reduce wheat diseases",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "recommended irrigation methods for maize under drought",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "treatment options for maize lethal necrosis",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ],
+    "relevant_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ]
+  },
+  {
+    "query": "how to monitor wheat crops for rust",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "nutrient deficiency symptoms in maize",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "disease cycle of wheat leaf rust",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "prevention of maize fungal infections",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "resistant wheat varieties for rust",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "impact of irrigation frequency on maize yield",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "leaf rust management using integrated pest control",
+    "precision@5": 0.0,
+    "recall@5": 0.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "soil fertility management for high maize yield",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "environmental conditions favoring wheat rust",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "crop rotation benefits for maize health",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "leaf symptoms and signs of wheat rust",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "fertilizer timing recommendations for maize",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "identifying early stages of MLN disease in maize",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ],
+    "relevant_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ]
+  },
+  {
+    "query": "importance of humidity in wheat rust infection",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "water management strategies for maize production",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "disease monitoring and record keeping for wheat",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "maize growth stages and irrigation needs",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "impact of nitrogen on wheat rust severity",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "disease spread prevention for MLN in maize",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ],
+    "relevant_docs": [
+      "maize_MLN_disease_2021.pdf"
+    ]
+  },
+  {
+    "query": "mechanical methods to reduce wheat leaf rust",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  },
+  {
+    "query": "maize fertilizer recommendations for different soil types",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "maize_production_GA_2020.pdf"
+    ],
+    "relevant_docs": [
+      "maize_production_GA_2020.pdf"
+    ]
+  },
+  {
+    "query": "how to scout for wheat rust infections",
+    "precision@5": 1.0,
+    "recall@5": 1.0,
+    "retrieved_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ],
+    "relevant_docs": [
+      "wheat_disease_rust_2011.pdf"
+    ]
+  }
+]
