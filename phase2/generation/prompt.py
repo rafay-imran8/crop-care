@@ -1,37 +1,27 @@
-def build_prompt(retrieved_chunks, user_query):
-    """
-    retrieved_chunks: list of dicts with keys:
-        - text
-        - metadata {source, year}
-    """
+def build_prompt(context_blocks, question):
+    context_text = ""
 
-    context_blocks = []
-    for i, chunk in enumerate(retrieved_chunks, start=1):
-        source = chunk["metadata"].get("source", "Unknown")
-        year = chunk["metadata"].get("year", "N/A")
+    for i, c in enumerate(context_blocks, start=1):
+        source = c["metadata"].get("source", "unknown")
+        year = c["metadata"].get("publication_year", "unknown")
 
-        context_blocks.append(
-            f"[{i}] Source: {source} | Year: {year}\n{chunk['text']}"
+        context_text += (
+            f"[{i}] {source} ({year})\n"
+            f"{c['text']}\n\n"
         )
 
-    context = "\n\n".join(context_blocks)
-
     prompt = f"""
-You are an agriculture assistant.
+You are an agriculture extension expert.
 
-Context:
-{context}
+Use ONLY the information provided in the context to answer the question.
+Do NOT use outside knowledge.
 
-Question:
-{user_query}
+CONTEXT:
+{context_text}
 
-Instructions:
-- Answer ONLY using the context above.
-- Cite sources using [1], [2], etc.
-- Provide a short actionable checklist.
-- Avoid chemical dosage instructions.
-- If the context is insufficient, ask clarifying questions.
-- Include a brief safety disclaimer.
+QUESTION:
+{question}
+
+ANSWER:
 """
-
     return prompt.strip()

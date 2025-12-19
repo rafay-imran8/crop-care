@@ -29,8 +29,9 @@ def run_rag(query):
     return answer
 
 if __name__ == "__main__":
-    query = input("Enter agriculture question: ")
-    response = run_rag(query)
+    while(True):
+        query = input("Enter agriculture question: ")
+        response = run_rag(query)
 
-    print("\n--- RAG ANSWER ---\n")
-    print(response)
+        print("\n--- RAG ANSWER ---\n")
+        print(response)
