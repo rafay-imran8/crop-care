@@ -34,7 +34,7 @@ for doc in documents:
         chunk_text = text[start:end]
 
         chunk_meta = metadata.copy()
-        chunk_meta["chunk_id"] = chunk_id
+        # chunk_meta["chunk_id"] = chunk_id
 
         all_chunks.append({
             "chunk_id": chunk_id,
