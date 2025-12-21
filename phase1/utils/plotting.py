@@ -5,6 +5,6 @@ def plot_loss(losses):
     plt.plot(losses)
     plt.xlabel("Epoch")
     plt.ylabel("Cross-Entropy Loss")
-    plt.title("Encoder-Only Transformer Training Loss")
+    plt.title("Transformer Training Loss")
     plt.grid(True)
     plt.show()
