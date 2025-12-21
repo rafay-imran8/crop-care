@@ -13,14 +13,21 @@ def build_prompt(context_blocks, question):
     prompt = f"""
 You are an agriculture extension expert.
 
-Use ONLY the information provided in the context to answer the question.
-Do NOT use outside knowledge.
+Use ONLY the information provided in the CONTEXT.
+
 
 CONTEXT:
 {context_text}
 
 QUESTION:
 {question}
+
+INSTRUCTIONS:
+- Answer in 2–3 clear paragraphs
+- Cite sources like [1], [2]
+- Provide a short Action Checklist (bullets)
+- Do NOT include chemical dosage values
+- End with a short safety disclaimer
 
 ANSWER:
 """

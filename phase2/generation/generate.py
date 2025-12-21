@@ -1,30 +1,23 @@
-import torch
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+import os
+from openai import OpenAI
+from generation.prompt import build_prompt
 
-MODEL_NAME = "google/flan-t5-base"
+# OpenRouter client
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY")
+)
 
-tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
-model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
+def generate_answer(context_blocks, question):
+    prompt = build_prompt(context_blocks, question)
 
-def generate_answer(prompt, max_tokens=256):
-    inputs = tokenizer(
-        prompt,
-        return_tensors="pt",
-        truncation=True,
-        max_length=512
+    response = client.chat.completions.create(
+        model="mistralai/mistral-7b-instruct:free",  # 🔒 FREE MODEL (no quota)
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.2,
+        max_tokens=500
     )
 
-    with torch.no_grad():
-        output_ids = model.generate(
-            input_ids=inputs["input_ids"],
-            attention_mask=inputs["attention_mask"],
-            max_new_tokens=max_tokens,
-            # temperature=0.0  # deterministic
-        )
-
-    answer = tokenizer.decode(
-        output_ids[0],
-        skip_special_tokens=True
-    )
-
-    return answer
+    return response.choices[0].message.content.strip()
