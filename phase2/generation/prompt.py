@@ -28,6 +28,12 @@ INSTRUCTIONS:
 - Provide a short Action Checklist (bullets)
 - Do NOT include chemical dosage values
 - End with a short safety disclaimer
+- If context is insufficient:
+  - DO NOT answer the question directly
+  - Ask clarifying questions covering:
+    • Crop type
+    • Geographic region
+    • Current season or growth stage
 
 ANSWER:
 """
