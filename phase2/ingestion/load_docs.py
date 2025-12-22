@@ -19,6 +19,7 @@ PDF_METADATA = {
     "wheat_disease_rust_2011.pdf": {"crop": "wheat", "publication_year": 2011},
     "maize_MLN_disease_2021.pdf": {"crop": "maize", "publication_year": 2021},
     "maize_production_GA_2020.pdf": {"crop": "maize", "publication_year": 2020},
+    "rice_good_practice_2008.pdf": {"crop": "rice", "publication_year": 2008},
 }
 
 # -------------------------
