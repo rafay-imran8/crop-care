@@ -47,9 +47,6 @@ Implements a complete RAG pipeline that:
 ## Installation
 
 ### 1. Clone/Download the Repository
-```bash
-cd path/to/2022416
-```
 
 ### 2. Install Dependencies
 ```bash
