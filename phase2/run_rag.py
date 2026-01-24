@@ -31,47 +31,48 @@ chunk_embeddings = np.array([c["embedding"] for c in chunks])
 # -------------------------
 # Batch testing on predefined queries
 # -------------------------
-unseen_queries = [
-    # WHEAT
-    "Symptoms of leaf rust in wheat",
-    "Brown rust management in wheat",
-    "Nitrogen deficiency signs in wheat",
-    "Wheat flowering water requirements",
-    "Fungal disease prevention in wheat",
-    "Improving wheat soil fertility",
-    "Best irrigation schedule for wheat",
-    "Using resistant wheat varieties",
-    "Safe pesticide usage in wheat fields",
-    "Monitoring wheat leaves for pests",
+# unseen_queries = [
+#     # WHEAT
+#     "Symptoms of leaf rust in wheat",
+#     "Brown rust management in wheat",
+#     "Nitrogen deficiency signs in wheat",
+#     "Wheat flowering water requirements",
+#     "Fungal disease prevention in wheat",
+#     "Improving wheat soil fertility",
+#     "Best irrigation schedule for wheat",
+#     "Using resistant wheat varieties",
+#     "Safe pesticide usage in wheat fields",
+#     "Monitoring wheat leaves for pests",
     
-    # MAIZE
-    "How to irrigate maize efficiently",
-    "Maize lethal necrosis symptoms",
-    "Water stress effects in maize",
-    "Pest control in maize fields",
-    "Soil nutrient imbalance management for maize",
-    "Caterpillar damage control in maize",
-    "Reducing leaf rolling in maize",
-    "Balanced fertilizer application in maize",
-    "Viral disease detection in maize",
-    "Certified seed usage for maize disease prevention",
+#     # MAIZE
+#     "How to irrigate maize efficiently",
+#     "Maize lethal necrosis symptoms",
+#     "Water stress effects in maize",
+#     "Pest control in maize fields",
+#     "Soil nutrient imbalance management for maize",
+#     "Caterpillar damage control in maize",
+#     "Reducing leaf rolling in maize",
+#     "Balanced fertilizer application in maize",
+#     "Viral disease detection in maize",
+#     "Certified seed usage for maize disease prevention",
     
-    # RICE
-    "Best irrigation schedule for rice",
-    "Managing rice brown spot disease",
-    "Low nitrogen effects on rice growth",
-    "Rice soil fertility improvement techniques",
-    "Controlling rice stem borers",
-    "Water management in rice paddies",
-    "Rice blast disease prevention",
-    "Improving drainage in rice fields",
-    "Organic matter application in rice fields",
-    "Monitoring rice growth under drought"
-]
+#     # RICE
+#     "Best irrigation schedule for rice",
+#     "Managing rice brown spot disease",
+#     "Low nitrogen effects on rice growth",
+#     "Rice soil fertility improvement techniques",
+#     "Controlling rice stem borers",
+#     "Water management in rice paddies",
+#     "Rice blast disease prevention",
+#     "Improving drainage in rice fields",
+#     "Organic matter application in rice fields",
+#     "Monitoring rice growth under drought"
+# ]
 
 
 
-for i, query_text in enumerate(unseen_queries, start=1):
+for i in range(5):
+    query_text = input(f"Enter query {i+1}: ")
     print(f"\nQuery {i}: {query_text}")
 
     # Encode query

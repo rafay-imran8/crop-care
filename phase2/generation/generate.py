@@ -12,7 +12,7 @@ def generate_answer(context_blocks, question):
     prompt = build_prompt(context_blocks, question)
 
     response = client.chat.completions.create(
-        model="mistralai/mistral-7b-instruct:free",  # 🔒 FREE MODEL (no quota)
+        model="google/gemma-3-4b-it:free",  # 🔒 COMPLETELY FREE MODEL
         messages=[
             {"role": "user", "content": prompt}
         ],
