@@ -1,0 +1,156 @@
+# =========================
+
+# Python
+
+# =========================
+
+**pycache**/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables / secrets
+
+.env
+.env.*
+!.env.example
+
+# =========================
+
+# IDE / Editors
+
+# =========================
+
+.vscode/
+.idea/
+*.iml
+
+# =========================
+
+# OS
+
+# =========================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+
+# Jupyter
+
+# =========================
+
+.ipynb_checkpoints/
+
+# =========================
+
+# Logs
+
+# =========================
+
+*.log
+logs/
+
+# =========================
+
+# Phase 1 - Generated files
+
+# =========================
+
+phase1/train/loss_plot.png
+phase1/train/*.pt
+phase1/train/*.pth
+phase1/train/*.ckpt
+
+# =========================
+
+# Phase 2 - Generated / processed data
+
+# =========================
+
+# Raw PDFs / datasets
+
+phase2/data/raw/
+
+# Generated processed documents and chunks
+
+phase2/data/processed/
+
+# Generated embeddings
+
+phase2/embeddings/
+
+# Evaluation outputs
+
+phase2/evaluation/*.json
+phase2/evaluation/*.csv
+
+# Generated plots / reports
+
+phase2/**/*.png
+phase2/**/*.jpg
+phase2/**/*.jpeg
+
+# =========================
+
+# Model / ML artifacts
+
+# =========================
+
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Hugging Face / transformer caches
+
+.cache/
+.huggingface/
+transformers_cache/
+
+# =========================
+
+# Temporary files
+
+# =========================
+
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# =========================
+
+# Build / distribution
+
+# =========================
+
+build/
+dist/
+*.egg-info/
+
+# =========================
+
+# Testing / coverage
+
+# =========================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+pytestdebug.log

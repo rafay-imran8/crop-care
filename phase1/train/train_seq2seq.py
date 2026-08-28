@@ -3,39 +3,38 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import sys, os
+import os
+import sys
 
-# Add phase1 directory to Python path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PHASE1_DIR = os.path.abspath(os.path.join(CURRENT_DIR, ".."))
+
+print("CURRENT_DIR:", CURRENT_DIR)
+print("PHASE1_DIR:", PHASE1_DIR)
+print("UTILS EXISTS:", os.path.exists(os.path.join(PHASE1_DIR, "utils")))
+print(
+    "TOKENIZER EXISTS:",
+    os.path.exists(
+        os.path.join(PHASE1_DIR, "utils", "seq2seqtokenizer.py")
+    )
+)
+
 sys.path.insert(0, PHASE1_DIR)
+
+print("PHASE1 IN PATH:", PHASE1_DIR in sys.path)
+
+import utils
+
+print("UTILS IMPORT SUCCESSFUL")
+
+from utils.seq2seqtokenizer import Seq2SeqTokenizer
+
+print("TOKENIZER IMPORT SUCCESSFUL")
 
 from models.encoder_decoder import EncoderDecoderTransformer
 from utils.plotting import plot_loss
 from data.checklist_pairs import samples  # [(paragraph, checklist), ...]
 
-# -------------------------
-# Decoder Tokenizer with PAD, SOS, EOS
-# -------------------------
-class Seq2SeqTokenizer:
-    def __init__(self, texts):
-        self.pad = "<pad>"
-        self.sos = "<sos>"
-        self.eos = "<eos>"
-
-        vocab = set()
-        for t in texts:
-            vocab.update(t.lower().split())
-
-        # Indices: 0=pad, 1=sos, 2=eos, 3+=words
-        self.stoi = {self.pad: 0, self.sos: 1, self.eos: 2}
-        self.stoi.update({w: i + 3 for i, w in enumerate(sorted(vocab))})
-        self.itos = {i: w for w, i in self.stoi.items()}
-
-    def encode(self, text):
-        return [self.stoi[self.sos]] + [self.stoi[w] for w in text.lower().split()] + [self.stoi[self.eos]]
-
-    def decode(self, tokens):
-        return " ".join([self.itos[t] for t in tokens if t > 2])
 
 # -------------------------
 # Prepare Data
