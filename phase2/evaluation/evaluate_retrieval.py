@@ -1,82 +1,320 @@
-import os
 import json
+import os
+
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-# -------------------------
+
+# --------------------------------------------------
 # Paths
-# -------------------------
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROCESSED_DIR = os.path.join(BASE_DIR,"embeddings")
-EVAL_DIR = os.path.join(BASE_DIR, "evaluation")
+# --------------------------------------------------
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
 
-os.makedirs(EVAL_DIR, exist_ok=True)
+EMBEDDINGS_FILE = os.path.join(
+    BASE_DIR,
+    "embeddings",
+    "embed_store.json",
+)
 
-CHUNKS_FILE = os.path.join(PROCESSED_DIR, "embed_store.json")
-QUERIES_FILE = os.path.join(EVAL_DIR, "queries.json")
-OUTPUT_FILE = os.path.join(EVAL_DIR, "retrieval_metrics.json")
+EVALUATION_DIR = os.path.join(
+    BASE_DIR,
+    "evaluation",
+)
 
-TOP_K = 5  # Top-k retrieval
+QUERIES_FILE = os.path.join(
+    EVALUATION_DIR,
+    "queries.json",
+)
 
-# -------------------------
-# Load chunks and queries
-# -------------------------
-with open(CHUNKS_FILE, "r", encoding="utf-8") as f:
-    chunks = json.load(f)
+OUTPUT_FILE = os.path.join(
+    EVALUATION_DIR,
+    "retrieval_metrics.json",
+)
 
-with open(QUERIES_FILE, "r", encoding="utf-8") as f:
-    queries = json.load(f)
 
-# Load embeddings as numpy array
-chunk_embeddings = np.array([c["embedding"] for c in chunks])  # shape: (num_chunks, embedding_dim)
+# --------------------------------------------------
+# Configuration
+# --------------------------------------------------
+MODEL_NAME = "all-MiniLM-L6-v2"
+TOP_K = 5
 
-print(f"Loaded {len(chunks)} chunks, embedding dim={chunk_embeddings.shape[1]}")
 
-# -------------------------
-# Load sentence transformer
-# -------------------------
-embed_model = SentenceTransformer("all-MiniLM-L6-v2")  # same model as before
+# --------------------------------------------------
+# Load Data
+# --------------------------------------------------
+with open(
+    EMBEDDINGS_FILE,
+    "r",
+    encoding="utf-8",
+) as file:
+    chunks = json.load(file)
 
-# -------------------------
-# Evaluate retrieval
-# -------------------------
+
+with open(
+    QUERIES_FILE,
+    "r",
+    encoding="utf-8",
+) as file:
+    queries = json.load(file)
+
+
+if not chunks:
+    raise ValueError(
+        "No embedded chunks found."
+    )
+
+
+# --------------------------------------------------
+# Embeddings
+# --------------------------------------------------
+chunk_embeddings = np.asarray(
+    [
+        chunk["embedding"]
+        for chunk in chunks
+    ],
+    dtype=np.float32,
+)
+
+# Ensure stored vectors are normalized.
+norms = np.linalg.norm(
+    chunk_embeddings,
+    axis=1,
+    keepdims=True,
+)
+
+norms[norms == 0] = 1
+
+chunk_embeddings = (
+    chunk_embeddings / norms
+)
+
+
+# --------------------------------------------------
+# Model
+# --------------------------------------------------
+print(
+    f"Loading embedding model: {MODEL_NAME}"
+)
+
+embed_model = SentenceTransformer(
+    MODEL_NAME
+)
+
+
+# --------------------------------------------------
+# Evaluation
+# --------------------------------------------------
 results = []
 
-for q in queries:
-    query_text = q["query"]
-    relevant_docs = set(q["relevant_docs"])
+total_precision = 0.0
+total_recall = 0.0
 
-    # 1. Compute embedding for the query
-    query_embedding = embed_model.encode([query_text])[0]  # shape: (embedding_dim,)
 
-    # 2. Compute cosine similarity
-    # cosine_similarity = dot(A,B)/(||A||*||B||)
-    norms = np.linalg.norm(chunk_embeddings, axis=1) * np.linalg.norm(query_embedding)
-    sims = (chunk_embeddings @ query_embedding) / norms  # shape: (num_chunks,)
-    
-    # 3. Get top-k indices
-    topk_indices = sims.argsort()[-TOP_K:][::-1]
+for query in queries:
 
-    # 4. Compute Precision@k and Recall@k
-    retrieved_docs = set([chunks[i]["metadata"]["source"] for i in topk_indices])
-    num_relevant_retrieved = len(retrieved_docs & relevant_docs)
+    query_text = query["query"]
 
-    precision = num_relevant_retrieved / TOP_K # gives 0.2 due to less documents
-    recall = num_relevant_retrieved / len(relevant_docs)
+    # --------------------------------------------------
+    # Ground Truth
+    # --------------------------------------------------
+    relevant_chunks = set(
+        query.get(
+            "relevant_chunks",
+            []
+        )
+    )
 
-    # 5. Save result for this query
-    results.append({
-        "query": query_text,
-        "precision@5": precision,
-        "recall@5": recall,
-        "retrieved_docs": list(retrieved_docs),
-        "relevant_docs": list(relevant_docs)
-    })
+    relevant_documents = set(
+        query.get(
+            "relevant_docs",
+            []
+        )
+    )
 
-# -------------------------
-# Save results
-# -------------------------
-with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-    json.dump(results, f, indent=2)
+    # --------------------------------------------------
+    # Query Embedding
+    # --------------------------------------------------
+    query_embedding = embed_model.encode(
+        query_text,
+        normalize_embeddings=True,
+    )
 
-print(f"Saved retrieval evaluation to {OUTPUT_FILE}")
+    # --------------------------------------------------
+    # Similarity
+    # --------------------------------------------------
+    similarities = (
+        chunk_embeddings
+        @ query_embedding
+    )
+
+    # --------------------------------------------------
+    # Retrieve Top-K
+    # --------------------------------------------------
+    k = min(
+        TOP_K,
+        len(chunks),
+    )
+
+    topk_indices = np.argsort(
+        -similarities
+    )[:k]
+
+    retrieved_chunks = [
+        chunks[index]
+        for index in topk_indices
+    ]
+
+    retrieved_chunk_ids = {
+        chunk["chunk_id"]
+        for chunk in retrieved_chunks
+    }
+
+    retrieved_documents = {
+        chunk["metadata"]["source"]
+        for chunk in retrieved_chunks
+    }
+
+    # --------------------------------------------------
+    # Chunk-Level Evaluation
+    # --------------------------------------------------
+    if relevant_chunks:
+
+        relevant_retrieved = (
+            retrieved_chunk_ids
+            & relevant_chunks
+        )
+
+        precision = (
+            len(relevant_retrieved)
+            / k
+        )
+
+        recall = (
+            len(relevant_retrieved)
+            / len(relevant_chunks)
+        )
+
+        evaluation_level = "chunk"
+
+    # --------------------------------------------------
+    # Document-Level Backward Compatibility
+    # --------------------------------------------------
+    elif relevant_documents:
+
+        relevant_retrieved = (
+            retrieved_documents
+            & relevant_documents
+        )
+
+        precision = (
+            len(relevant_retrieved)
+            / k
+        )
+
+        recall = (
+            len(relevant_retrieved)
+            / len(relevant_documents)
+        )
+
+        evaluation_level = "document"
+
+    else:
+
+        precision = 0.0
+        recall = 0.0
+        evaluation_level = "undefined"
+
+    total_precision += precision
+    total_recall += recall
+
+    results.append(
+        {
+            "query": query_text,
+            "evaluation_level": evaluation_level,
+            "precision@5": precision,
+            "recall@5": recall,
+            "retrieved_chunks": [
+                chunk["chunk_id"]
+                for chunk in retrieved_chunks
+            ],
+            "retrieved_documents": list(
+                retrieved_documents
+            ),
+            "relevant_chunks": list(
+                relevant_chunks
+            ),
+            "relevant_documents": list(
+                relevant_documents
+            ),
+        }
+    )
+
+
+# --------------------------------------------------
+# Aggregate Metrics
+# --------------------------------------------------
+num_queries = len(queries)
+
+if num_queries:
+    mean_precision = (
+        total_precision / num_queries
+    )
+
+    mean_recall = (
+        total_recall / num_queries
+    )
+else:
+    mean_precision = 0.0
+    mean_recall = 0.0
+
+
+output = {
+    "top_k": TOP_K,
+    "num_queries": num_queries,
+    "mean_precision@5": mean_precision,
+    "mean_recall@5": mean_recall,
+    "queries": results,
+}
+
+
+# --------------------------------------------------
+# Save
+# --------------------------------------------------
+os.makedirs(
+    EVALUATION_DIR,
+    exist_ok=True,
+)
+
+with open(
+    OUTPUT_FILE,
+    "w",
+    encoding="utf-8",
+) as file:
+    json.dump(
+        output,
+        file,
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
+print(
+    f"\nEvaluated {num_queries} queries."
+)
+
+print(
+    f"Mean Precision@5: "
+    f"{mean_precision:.4f}"
+)
+
+print(
+    f"Mean Recall@5: "
+    f"{mean_recall:.4f}"
+)
+
+print(
+    f"Saved evaluation to: "
+    f"{OUTPUT_FILE}"
+)
