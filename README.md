@@ -1,5 +1,3 @@
-Yes — this root README is outdated in several places, especially **OpenRouter → Groq**, model names, chunking, file names, and the current Phase 1/Phase 2 structure. Here is the modified version while keeping your existing README structure and content style.
-
 # Agricultural AI: Multi-Phase NLP & RAG System
 
 A comprehensive project implementing transformer-based models for agricultural text processing and a Retrieval-Augmented Generation (RAG) system for answering agricultural questions.
