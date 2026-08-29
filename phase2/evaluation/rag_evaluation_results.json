@@ -1,0 +1,935 @@
+{
+  "configuration": {
+    "embedding_model": "all-MiniLM-L6-v2",
+    "num_queries": 15,
+    "num_chunks": 1324,
+    "top_k_values": [
+      1,
+      3,
+      5
+    ],
+    "generation_evaluation": true
+  },
+  "summary": {
+    "precision@1": 0.9333333333333333,
+    "recall@1": 0.9333333333333333,
+    "hit_rate@1": 0.9333333333333333,
+    "ndcg@1": 0.9333333333333333,
+    "precision@3": 0.9,
+    "recall@3": 1.0,
+    "hit_rate@3": 1.0,
+    "ndcg@3": 0.9753953169047639,
+    "precision@5": 0.9,
+    "recall@5": 1.0,
+    "hit_rate@5": 1.0,
+    "ndcg@5": 0.9753953169047639,
+    "mrr": 0.9666666666666667,
+    "answer_generation_success_rate": 1.0,
+    "citation_rate": 0.8
+  },
+  "queries": [
+    {
+      "query": "What are the main symptoms and characteristics of rust diseases in wheat?",
+      "relevant_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 0,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7664670348167419
+        },
+        {
+          "chunk_id": 12,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7487947940826416
+        },
+        {
+          "chunk_id": 21,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7334928512573242
+        },
+        {
+          "chunk_id": 293,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7316915988922119
+        },
+        {
+          "chunk_id": 7,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7309151291847229
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.7664670348167419,
+        "average_similarity": 0.7422722816467285
+      },
+      "generated_answer": "Answer:\nThe provided sources do not contain specific descriptions of the visual symptoms or detailed characteristics of wheat rust diseases. While the manual references tables that summarize symptoms and environmental conditions for the three rust diseases, the actual symptom details are not included in the extracted context. Therefore, the available information is insufficient to list the main symptoms and characteristics of rust diseases in wheat.\n\nAction Checklist:\n- None (no actionable recommendations are supported by the provided context).\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agricultural professional before taking any disease management actions.",
+      "has_citations": false
+    },
+    {
+      "query": "How can wheat rust diseases be controlled and managed?",
+      "relevant_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 12,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.8117319345474243
+        },
+        {
+          "chunk_id": 0,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7674744129180908
+        },
+        {
+          "chunk_id": 21,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7485145926475525
+        },
+        {
+          "chunk_id": 7,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7355074882507324
+        },
+        {
+          "chunk_id": 174,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7247408032417297
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.8117319345474243,
+        "average_similarity": 0.7575938463211059
+      },
+      "generated_answer": "Answer:\nWheat rusts are managed by combining several strategies.  First, use cultivars that carry resistance genes; resistance is the most reliable long‑term control and is discussed as a core method in the manual [4].  Second, fungicides can be applied, but most products give only partial control on susceptible varieties when the environment is favorable for disease development, and many pathogens have already developed resistance to chemicals [5].  Third, cultural practices—such as crop rotation, seed treatment, sanitation, and other agronomic adjustments—provide at least partial control; no single practice works in all situations, but a series of cultural measures can enhance the effectiveness of resistance [5].  The manual also emphasizes that practical information on how to apply these concepts is available for both developing and developed countries [1].\n\nAction Checklist:\n- Plant wheat varieties that carry known rust‑resistance genes [4].\n- Apply fungicides only when environmental conditions favor rust development and when the cultivar is susceptible [5].\n- Use a combination of cultural practices (crop rotation, seed treatment, sanitation, and field management) to reduce inoculum and disease spread [5].\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agronomist or plant‑pathology specialist before applying chemicals or making major management changes.",
+      "has_citations": true
+    },
+    {
+      "query": "What are the different types of rust diseases affecting wheat?",
+      "relevant_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 0,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7465701103210449
+        },
+        {
+          "chunk_id": 17,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.726443886756897
+        },
+        {
+          "chunk_id": 21,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7260942459106445
+        },
+        {
+          "chunk_id": 12,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.724066972732544
+        },
+        {
+          "chunk_id": 293,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7171067595481873
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.7465701103210449,
+        "average_similarity": 0.7280563950538635
+      },
+      "generated_answer": "Answer:\nThe literature indicates that wheat can be affected by **three distinct rust diseases**.  One of these is the most common, known as **leaf or brown rust** that develops on leaf blades and, under favorable conditions, on leaf sheaths [2].  The other two rust types are mentioned only as part of the trio of wheat rusts, but their specific names are not provided in the excerpts supplied [3].\n\nAction Checklist:\n- None provided in the available sources.\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agricultural professional before taking any action.",
+      "has_citations": true
+    },
+    {
+      "query": "What management methods are recommended for wheat rust diseases?",
+      "relevant_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 12,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.8108029365539551
+        },
+        {
+          "chunk_id": 21,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7355788350105286
+        },
+        {
+          "chunk_id": 0,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7340372800827026
+        },
+        {
+          "chunk_id": 174,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7290983200073242
+        },
+        {
+          "chunk_id": 7,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.7044773697853088
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.8108029365539551,
+        "average_similarity": 0.7427989482879639
+      },
+      "generated_answer": "Answer:\nManagement of wheat rust diseases is approached through a combination of host resistance, chemical control, and cultural practices.  Breeding and planting resistant cultivars is the first line of defense, while fungicides are used when environmental conditions favor disease development and susceptible varieties are grown.  Cultural methods—such as crop rotation, residue management, and adjusting planting dates—help reduce inoculum levels and interrupt the disease cycle.  These strategies are outlined in the manual’s discussion of disease control through resistance, chemicals, and cultural methods [5] and the emphasis on fungicide use and cultural practices in large‑area wheat production [4].\n\nAction Checklist:\n- Select and plant wheat varieties that carry known rust resistance genes [5].\n- Apply fungicides during periods of high moisture and favorable temperatures, ensuring coverage of susceptible crops [4].\n- Implement cultural practices that lower inoculum, including crop rotation, proper residue management, and optimal planting dates to avoid peak disease periods [4][5].\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agronomist or plant pathologist before applying chemicals or making major management changes.",
+      "has_citations": true
+    },
+    {
+      "query": "What are the symptoms and management strategies for maize lethal necrosis disease?",
+      "relevant_docs": [
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_docs": [
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 491,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.7629399299621582
+        },
+        {
+          "chunk_id": 492,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.7539210319519043
+        },
+        {
+          "chunk_id": 496,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.6858980655670166
+        },
+        {
+          "chunk_id": 497,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.6822335720062256
+        },
+        {
+          "chunk_id": 500,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.6767598390579224
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.7629399299621582,
+        "average_similarity": 0.7123504877090454
+      },
+      "generated_answer": "Answer:\nThe available sources do not provide enough information to answer this question.",
+      "has_citations": false
+    },
+    {
+      "query": "How does maize lethal necrosis affect maize plants?",
+      "relevant_docs": [
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_docs": [
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 491,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.7544830441474915
+        },
+        {
+          "chunk_id": 492,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.7535945177078247
+        },
+        {
+          "chunk_id": 496,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.7007576823234558
+        },
+        {
+          "chunk_id": 546,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.6674467325210571
+        },
+        {
+          "chunk_id": 559,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.6635549068450928
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.7544830441474915,
+        "average_similarity": 0.7079673767089844
+      },
+      "generated_answer": "Answer:\nMaize lethal necrosis (MLN) is caused by a complex of maize chlorotic mottle virus (MCMV) and a maize‑infecting potyvirus. The infection produces a severe systemic necrosis that can lead to plant death [5]. Symptoms appear rapidly: leaves become necrotic, plants are stunted, and they may die prematurely. Infected ears are often small, deformed, partially filled, or absent, and even when plants survive, kernel weight can be greatly reduced, especially when infection occurs later in the growth cycle [5].\n\nAction Checklist:\n- None provided in the sources.\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agricultural professional before taking any action related to disease management.",
+      "has_citations": true
+    },
+    {
+      "query": "What practices can farmers use to prevent or manage maize lethal necrosis?",
+      "relevant_docs": [
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_docs": [
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 491,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.7579842805862427
+        },
+        {
+          "chunk_id": 492,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.744267463684082
+        },
+        {
+          "chunk_id": 508,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.7019299268722534
+        },
+        {
+          "chunk_id": 496,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.6848050355911255
+        },
+        {
+          "chunk_id": 500,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.666304349899292
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.7579842805862427,
+        "average_similarity": 0.7110582113265991
+      },
+      "generated_answer": "Answer:\nThe available sources do not provide enough information to answer this question.\n\nAction Checklist:\n- N/A\n\nSafety:\nPlease follow local agricultural regulations and consult a qualified agricultural professional before taking any high‑risk actions.",
+      "has_citations": false
+    },
+    {
+      "query": "What factors are important for successful maize production?",
+      "relevant_docs": [
+        "maize_production_GA_2020.pdf"
+      ],
+      "retrieved_docs": [
+        "maize_production_GA_2020.pdf",
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 842,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.6011334657669067
+        },
+        {
+          "chunk_id": 509,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.5592392683029175
+        },
+        {
+          "chunk_id": 869,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5511940121650696
+        },
+        {
+          "chunk_id": 843,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.546255350112915
+        },
+        {
+          "chunk_id": 814,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5434269309043884
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 0.5,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 0.5,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.6011334657669067,
+        "average_similarity": 0.5602498054504395
+      },
+      "generated_answer": "Answer:\nSuccessful maize production depends on a combination of genetic, soil, climatic, and management factors. The hybrid (genetics) sets the potential yield, but the environment—soil texture, pH, cation‑exchange capacity, organic matter, and bulk density—must support that potential [1]. Climatic inputs such as sunlight, temperature, and especially water availability are critical; drought can reduce yields to 38‑64 % of non‑stressed levels [5]. Management practices that protect the crop from pests, diseases, hardpans, nematodes, and other stresses,",
+      "has_citations": true
+    },
+    {
+      "query": "What are the recommended production practices for maize?",
+      "relevant_docs": [
+        "maize_production_GA_2020.pdf"
+      ],
+      "retrieved_docs": [
+        "maize_production_GA_2020.pdf",
+        "maize_MLN_disease_2021.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 842,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5864747762680054
+        },
+        {
+          "chunk_id": 508,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.557098925113678
+        },
+        {
+          "chunk_id": 820,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5539743304252625
+        },
+        {
+          "chunk_id": 509,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.5387462973594666
+        },
+        {
+          "chunk_id": 494,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.5379509925842285
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 0.5,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 0.5,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.5864747762680054,
+        "average_similarity": 0.5548490643501282
+      },
+      "generated_answer": "Answer:\nRecommended maize production practices focus on optimizing the interaction between the hybrid, the environment, and management inputs. Key practices include:\n\n- **Soil preparation and erosion control**: Work the land only enough to achieve a weed‑free seedbed, protect against water and wind erosion, and disrupt hardpans or compacted layers that limit root growth. Reducing tillage helps conserve moisture and reduce compaction [3].\n- **Pest and disease protection**: Ensure the crop is protected from disease pathogens, insects, nematodes, and other stressors that can reduce yield. This involves selecting resistant hybrids and applying appropriate crop protection measures [1].\n- **Input management**: Provide all necessary inputs—improved seed, fertilizers, and other agronomic inputs—at the right time to meet a target yield, recognizing that yield is a function of hybrid genetics and environmental conditions [1].\n\nAction Checklist:\n- Prepare the soil to reduce erosion and compaction, and create a weed‑free seedbed before planting. [3]\n- Protect the crop from pests and diseases by using resistant hybrids and timely crop protection practices. [1]\n- Supply the required inputs (seed, fertilizer, etc.) at the appropriate times to meet yield goals. [1]\n- Monitor soil and climatic conditions to adjust management practices as needed. [1][3]\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agronomist or extension officer before implementing high‑risk practices.",
+      "has_citations": true
+    },
+    {
+      "query": "What good agricultural practices are recommended for rice production?",
+      "relevant_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1198,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6903355121612549
+        },
+        {
+          "chunk_id": 1258,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6658192873001099
+        },
+        {
+          "chunk_id": 1203,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6453449130058289
+        },
+        {
+          "chunk_id": 1170,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6435064077377319
+        },
+        {
+          "chunk_id": 1235,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6409640908241272
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.6903355121612549,
+        "average_similarity": 0.6571940422058106
+      },
+      "generated_answer": "Answer:\nGood agricultural practices for rice production focus on producing safe, high‑quality rice and preventing contamination by off‑type varieties and pests. Farmers should plant rice at a time that suits the variety and avoids adverse weather such as excessive heat or cold during blooming and heavy rain at harvest [5]. Off‑type rice plants must be removed promptly: uproot all stems, roots and tillers at the tillering stage, and cut stems at soil surface during flowering, dough and ripening stages to keep off‑type content below 3 % (red rice ≤ 1 %) [2][3][5]. Regular surveys for pest damage and disease (rice blast, brown spot, bacterial bright, rugged stunt, dirty seed) are required, with control measures applied so that pest‑related damage does not exceed 10 % of the crop [2][3]. Farmers should also learn about pest life cycles and the local ecosystem to implement effective prevention and control strategies [2].\n\nAction Checklist:\n- Plant rice at the recommended season for the variety and avoid unfavorable weather during key growth stages [5].\n- Uproot off‑type rice at tillering and cut stems at flowering, dough, and ripening to keep admixture below 3 % (red rice ≤ 1 %) [2][3][5].\n- Inspect fields regularly for pests and diseases; apply control practices so pest damage stays under 10 % of the crop [2][3].\n- Keep records of disease severity (blast, brown spot, bacterial bright, rugged stunt, dirty seed) and the control actions taken [3].\n- Maintain off‑type rice levels below the specified limits and adjust management practices accordingly [5].\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agricultural professional before implementing high‑risk actions.",
+      "has_citations": true
+    },
+    {
+      "query": "How should water and nutrients be managed for rice production?",
+      "relevant_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1248,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6332875490188599
+        },
+        {
+          "chunk_id": 1255,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6205226182937622
+        },
+        {
+          "chunk_id": 1235,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.5987415313720703
+        },
+        {
+          "chunk_id": 1253,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.5968656539916992
+        },
+        {
+          "chunk_id": 1224,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.5966780781745911
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.6332875490188599,
+        "average_similarity": 0.6092190861701965
+      },
+      "generated_answer": "Answer:\nWater and nutrient management for rice should be coordinated with crop growth stages.  \n- **Water**: Keep the field flooded at a depth of 5–10 cm during the tillering stage to suppress weeds and prevent the emergence of non‑productive tillers; at the seedling stage flooding is not required, and after fertilizer application water can flow normally. Maintain a 5‑cm water level before applying fertilizer and ensure the water source is free from hazardous contamination, testing it if there is any doubt [2][5].  \n- **Nutrients**: Apply a basal dose of 20–25 kg / rai of a suitable compound fertilizer (e.g., 16‑20‑0, 18‑22‑0, 20‑20‑0, 16‑16‑8, or 18‑12‑6) based on rice variety and soil type, and calculate the amount accurately to meet plant needs. Incorporate green manure before planting to reduce the need for chemical fertilizers, and use heavy organic fertilizer applications to lower chemical use [1][4][2].\n\nAction Checklist:\n- Maintain 5–10 cm water depth during tillering and adjust to higher levels at maximum tillering to control weeds and non‑productive tillers.  \n- Test water sources for contamination before use and keep records of sampling results.  \n- Apply 20–25 kg / rai of a recommended compound fertilizer at basal stage, tailored to variety and soil type.  \n- Incorporate green manure into the soil before rice planting to reduce chemical fertilizer requirements.  \n- Calculate fertilizer amounts accurately to meet plant nutrient demands.\n\nSafety:  \nFollow local agricultural regulations and consult a qualified agronomist before making any high‑risk changes to water or fertilizer management.",
+      "has_citations": true
+    },
+    {
+      "query": "What practices can improve rice production and crop health?",
+      "relevant_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1203,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6626322269439697
+        },
+        {
+          "chunk_id": 1191,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6466169357299805
+        },
+        {
+          "chunk_id": 1198,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6422029733657837
+        },
+        {
+          "chunk_id": 1258,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6408983469009399
+        },
+        {
+          "chunk_id": 1170,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6259233951568604
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.6626322269439697,
+        "average_similarity": 0.6436547756195068
+      },
+      "generated_answer": "Answer:\nGood agricultural practices for rice focus on early detection and removal of off‑type plants, regular pest monitoring, and maintaining plant health so that damage does not exceed 10 % of the crop.  Off‑type rice should be uprooted at the tillering stage and cut at the soil surface during flowering, dough, and ripening stages to prevent competition and disease spread [1][4].  Farmers should conduct visual inspections for pest damage and weedy rice, and apply control measures following the Rice Department’s guidelines, ensuring that pesticide use is recorded and that overall plant damage remains below the 10 % threshold [2][4].  Maintaining detailed records of pest surveys and pesticide applications helps track effectiveness and supports compliance with national standards for safe rice production [2][5].  These practices collectively improve yield, reduce disease incidence, and promote crop health.\n\nAction Checklist:\n- Inspect fields for off‑type rice and uproot all stems, roots, and tillers at the tillering stage [1][4].\n- Cut off‑type rice stems at soil surface during flowering, dough, and ripening stages [4].\n- Perform regular visual surveys for pest damage and weedy rice; keep damage below 10 % and record findings [2][4].\n- Log all pesticide applications and review records to ensure compliance with guidelines [2].\n- Examine harvested grain for defects and disease before storage or sale [2].\n\nSafety:\nAlways follow local agricultural regulations, use protective equipment when handling pesticides, and consult a qualified agricultural professional before implementing high‑risk control measures.",
+      "has_citations": true
+    },
+    {
+      "query": "How can farmers manage diseases in wheat crops?",
+      "relevant_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_docs": [
+        "wheat_disease_rust_2011.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 177,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.6545926332473755
+        },
+        {
+          "chunk_id": 0,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.6354256868362427
+        },
+        {
+          "chunk_id": 9,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.6326675415039062
+        },
+        {
+          "chunk_id": 176,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.6236029863357544
+        },
+        {
+          "chunk_id": 290,
+          "source": "wheat_disease_rust_2011.pdf",
+          "page": null,
+          "similarity": 0.6197412014007568
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.6545926332473755,
+        "average_similarity": 0.6332060098648071
+      },
+      "generated_answer": "Answer:\nFarmers can manage wheat rust diseases through a combination of cultural practices, cultivar selection, and monitoring.  Arranging fields so that early‑maturing cultivars are down‑wind from late‑maturing ones and avoiding planting autumn‑ and spring‑sown wheats in the same area can reduce infection risk and delay disease onset [1].  Removing the green bridge of susceptible volunteer plants with tillage or herbicides limits endogenous inoculum, while using multiple cultivars with differing resistance and adjusting irrigation and fertilization schedules can further suppress epidemics [4].  Regular disease surveillance each year helps detect outbreaks early and informs timely management decisions [5].\n\nAction Checklist:\n- Arrange fields so early‑maturing wheat is down‑wind from late‑maturing wheat and avoid planting autumn‑ and spring‑sown wheats in the same area [1].\n- Use tillage or herbicides to eliminate volunteer wheat plants that could serve as a green bridge [4].\n- Grow a mix of cultivars that differ in rust resistance and adjust irrigation/fertilization timing to reduce disease pressure [4].\n- Conduct annual disease monitoring to track development and guide management actions [5].\n\nSafety:\nAlways follow local agricultural regulations and consult a qualified agronomist before implementing high‑risk practices.",
+      "has_citations": true
+    },
+    {
+      "query": "What measures can farmers take to improve maize crop productivity?",
+      "relevant_docs": [
+        "maize_production_GA_2020.pdf"
+      ],
+      "retrieved_docs": [
+        "maize_MLN_disease_2021.pdf",
+        "maize_production_GA_2020.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 509,
+          "source": "maize_MLN_disease_2021.pdf",
+          "page": null,
+          "similarity": 0.5796750783920288
+        },
+        {
+          "chunk_id": 869,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5711072683334351
+        },
+        {
+          "chunk_id": 816,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5684702396392822
+        },
+        {
+          "chunk_id": 820,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5530980825424194
+        },
+        {
+          "chunk_id": 893,
+          "source": "maize_production_GA_2020.pdf",
+          "page": null,
+          "similarity": 0.5465878844261169
+        }
+      ],
+      "metrics": {
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "hit_rate@1": 0.0,
+        "ndcg@1": 0.0,
+        "precision@3": 0.5,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 0.6309297535714575,
+        "precision@5": 0.5,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 0.6309297535714575,
+        "reciprocal_rank": 0.5,
+        "top_similarity": 0.5796750783920288,
+        "average_similarity": 0.5637877106666564
+      },
+      "generated_answer": "Answer:\nFarmers can boost maize productivity by addressing the main constraints that keep yields below the global average. First, improve input quality and use: adopt high‑yielding hybrids, apply fertilizers based on soil test results, and manage pests and diseases to reduce biotic losses [1]. Second, use soil and plant tissue testing to fine‑tune nutrient management—soil tests establish baseline fertility, while plant analysis can confirm deficiencies before they affect growth [2]. Third, prepare the soil properly: avoid over‑working, break up hardpans, and protect against wind and water erosion to maintain a weed‑free seedbed and promote root development [4]. Fourth, schedule irrigation efficiently; for fields that can support >150 bushels/acre, use precise, sensor‑based irrigation to",
+      "has_citations": true
+    },
+    {
+      "query": "What agricultural practices help maintain healthy rice crops?",
+      "relevant_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_docs": [
+        "rice_good_practice_2008.pdf"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1198,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6178771257400513
+        },
+        {
+          "chunk_id": 1170,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.6075273156166077
+        },
+        {
+          "chunk_id": 1203,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.594185471534729
+        },
+        {
+          "chunk_id": 1258,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.589999794960022
+        },
+        {
+          "chunk_id": 1191,
+          "source": "rice_good_practice_2008.pdf",
+          "page": null,
+          "similarity": 0.5854271650314331
+        }
+      ],
+      "metrics": {
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "hit_rate@1": 1.0,
+        "ndcg@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "hit_rate@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0,
+        "hit_rate@5": 1.0,
+        "ndcg@5": 1.0,
+        "reciprocal_rank": 1.0,
+        "top_similarity": 0.6178771257400513,
+        "average_similarity": 0.5990033745765686
+      },
+      "generated_answer": "**Answer**  \nHealthy rice crops are maintained by following good agricultural practices that focus on early detection and removal of off‑type/weedy rice, regular pest and disease monitoring, and keeping damage below 10 % of the crop. Farmers should uproot off‑type plants at the tillering stage and cut them at flowering, dough, and ripening stages [4]. Disease surveys for rice blast, brown spot, bacterial bright, rugged stunt, and dirty seed should be conducted, and control measures applied according to the severity level [3]. Pest control should be based on knowledge of pest life cycles and ecosystem interactions, with records kept of damage surveys and pesticide applications to ensure that insect and",
+      "has_citations": true
+    }
+  ]
+}

@@ -91,7 +91,6 @@ phase2/embeddings/
 
 # Evaluation outputs
 
-phase2/evaluation/*.json
 phase2/evaluation/*.csv
 
 # Generated plots / reports
