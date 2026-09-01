@@ -77,17 +77,9 @@ phase1/train/*.ckpt
 
 # =========================
 
-# Raw PDFs / datasets
-
-phase2/data/raw/
-
-# Generated processed documents and chunks
-
-phase2/data/processed/
-
-# Generated embeddings
-
-phase2/embeddings/
+# Data files (JSON, PDF) - keep folders with .gitkeep
+*.json
+*.pdf
 
 # Evaluation outputs
 
