@@ -2,14 +2,16 @@ import os
 from openai import OpenAI
 from generation.prompt import build_prompt
 
-client = OpenAI(
-    base_url="https://api.groq.com/openai/v1",
-    api_key=os.getenv("GROQ_API_KEY")
-)
-
 MODEL = "openai/gpt-oss-20b"
 
 def generate_answer(context_blocks, question):
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        raise RuntimeError("GROQ_API_KEY is not configured.")
+    client = OpenAI(
+        base_url="https://api.groq.com/openai/v1",
+        api_key=api_key,
+    )
     prompt = build_prompt(context_blocks, question)
 
     response = client.chat.completions.create(

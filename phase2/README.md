@@ -31,6 +31,9 @@ phase2/
 │   ├── retriever.py            # Retrieve relevant chunks
 │   └── __pycache__/
 ├── run_rag.py                  # Main interactive RAG application
+├── api.py                      # FastAPI web backend
+├── app_service.py              # Upload and chat orchestration
+├── frontend/                   # React browser client
 └── README.md
 ```
 
@@ -75,6 +78,16 @@ To get an API key:
 ---
 
 ## RAG Pipeline Components
+
+### Web Application
+
+From the repository root, start the web application with:
+
+```bash
+uvicorn api:app --app-dir phase2 --reload
+```
+
+Open `http://localhost:8000`. Upload one or more PDFs with crop and publication year metadata. Each upload is extracted, chunked, embedded, and appended to the existing store; chat responses include retrieved source chunks and similarity scores.
 
 ### 1. Document Ingestion (`ingestion/load_docs.py`)
 

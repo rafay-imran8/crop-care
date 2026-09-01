@@ -62,6 +62,9 @@ Implements a complete Retrieval-Augmented Generation pipeline:
 └── phase2/
     ├── README.md
     ├── run_rag.py
+    ├── api.py
+    ├── app_service.py
+    └── frontend/
     │
     ├── data/
     │   ├── raw/
@@ -109,6 +112,8 @@ Phase 2 also requires environment-variable support:
 ```bash
 pip install python-dotenv
 ```
+
+The web application dependencies are included in `requirements.txt`.
 
 ### 3. Configure Groq API Key
 
@@ -172,6 +177,16 @@ python train/train_seq2seq.py
 Trains an encoder-decoder transformer to convert agricultural paragraphs into structured checklists.
 
 ### Phase 2: Running the RAG System
+
+#### Web Application
+
+Configure `GROQ_API_KEY`, then start the API from the repository root:
+
+```bash
+uvicorn api:app --app-dir phase2 --reload
+```
+
+Open `http://localhost:8000` to upload PDFs, track ingestion, and chat with source-grounded answers. New chunks are embedded and appended to the existing store. The original interactive CLI remains available below.
 
 #### 1. Add Agricultural Documents
 

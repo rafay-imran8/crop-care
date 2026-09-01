@@ -149,78 +149,52 @@ def is_likely_front_matter(text: str) -> bool:
     return matches >= 2
 
 
-# --------------------------------------------------
-# Extract PDF
-# --------------------------------------------------
-documents = []
+def extract_pdf(file_path, filename=None, crop="unknown", publication_year=None):
+    """Extract usable pages from one PDF with caller-provided metadata."""
+    filename = filename or os.path.basename(file_path)
+    documents = []
 
-for filename, meta in PDF_METADATA.items():
+    with fitz.open(file_path) as pdf_doc:
+        for page_index in range(pdf_doc.page_count):
+            text = clean_text(pdf_doc[page_index].get_text("text"))
+            if not text or is_likely_toc(text) or is_likely_front_matter(text):
+                continue
 
-    file_path = os.path.join(RAW_DIR, filename)
-
-    if not os.path.exists(file_path):
-        print(f"File not found: {file_path}")
-        continue
-
-    pdf_doc = fitz.open(file_path)
-
-    extracted_pages = 0
-    skipped_pages = 0
-
-    for page_index in range(pdf_doc.page_count):
-
-        page = pdf_doc[page_index]
-
-        raw_text = page.get_text("text")
-
-        if not raw_text.strip():
-            continue
-
-        text = clean_text(raw_text)
-
-        if not text:
-            continue
-
-        # Skip obvious TOC/front-matter pages.
-        if is_likely_toc(text) or is_likely_front_matter(text):
-            skipped_pages += 1
-            continue
-
-        documents.append(
-            {
+            documents.append({
                 "text": text,
                 "metadata": {
-                    "crop": meta["crop"],
-                    "publication_year": meta["publication_year"],
+                    "crop": crop,
+                    "publication_year": publication_year,
                     "source": filename,
                     "page": page_index + 1,
                 },
-            }
-        )
+            })
 
-        extracted_pages += 1
-
-    pdf_doc.close()
-
-    print(
-        f"Ingested: {filename} | "
-        f"pages kept={extracted_pages}, "
-        f"pages skipped={skipped_pages}"
-    )
+    return documents
 
 
-# --------------------------------------------------
-# Save
-# --------------------------------------------------
-with open(OUTPUT_FILE, "w", encoding="utf-8") as file:
-    json.dump(
-        documents,
-        file,
-        ensure_ascii=False,
-        indent=2,
-    )
+def extract_directory(metadata_by_filename=None):
+    """Extract all configured PDFs in the legacy raw-data directory."""
+    metadata_by_filename = metadata_by_filename or PDF_METADATA
+    documents = []
+    for filename, meta in metadata_by_filename.items():
+        file_path = os.path.join(RAW_DIR, filename)
+        if not os.path.exists(file_path):
+            print(f"File not found: {file_path}")
+            continue
+        extracted = extract_pdf(file_path, filename, **meta)
+        documents.extend(extracted)
+        print(f"Ingested: {filename} | pages kept={len(extracted)}")
+    return documents
 
-print(
-    f"\nSaved {len(documents)} cleaned pages "
-    f"to {OUTPUT_FILE}"
-)
+
+def save_documents(documents, output_file=OUTPUT_FILE):
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    with open(output_file, "w", encoding="utf-8") as file:
+        json.dump(documents, file, ensure_ascii=False, indent=2)
+
+
+if __name__ == "__main__":
+    documents = extract_directory()
+    save_documents(documents)
+    print(f"\nSaved {len(documents)} cleaned pages to {OUTPUT_FILE}")

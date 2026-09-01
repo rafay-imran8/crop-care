@@ -4,6 +4,102 @@ import os
 import numpy as np
 
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+EMBED_STORE_FILE = os.path.join(BASE_DIR, "embeddings", "embed_store.json")
+
+
+def load_store(store_file=EMBED_STORE_FILE):
+    if not os.path.exists(store_file):
+        return [], np.empty((0, 0), dtype=np.float32)
+    with open(store_file, "r", encoding="utf-8") as file:
+        loaded_chunks = json.load(file)
+    return loaded_chunks, np.asarray(
+        [chunk["embedding"] for chunk in loaded_chunks], dtype=np.float32
+    )
+
+
+def detect_crop(query: str):
+    query = query.lower()
+    for crop, aliases in {
+        "wheat": ["wheat"], "maize": ["maize", "corn"], "rice": ["rice"]
+    }.items():
+        if any(alias in query for alias in aliases):
+            return crop
+    return None
+
+
+def is_quality_chunk(chunk, min_len=150):
+    text = chunk.get("text", "").strip().lower()
+    if len(text) < min_len:
+        return False
+    if any(marker in text for marker in [
+        "references", "copyright", "table of contents", "design assistants", "cover photos"
+    ]):
+        return False
+    alpha_ratio = sum(character.isalpha() for character in text) / len(text)
+    return alpha_ratio >= 0.45
+
+
+def filter_chunks(chunks):
+    return [chunk for chunk in chunks if is_quality_chunk(chunk)]
+
+
+def retrieve_from_store(query_embedding, query_text=None, top_k=3,
+                        store_chunks=None, store_embeddings=None):
+    if top_k <= 0:
+        return []
+    query_embedding = np.asarray(query_embedding, dtype=np.float32)
+    query_norm = np.linalg.norm(query_embedding)
+    if query_norm == 0:
+        return []
+    store_chunks = store_chunks or []
+    if store_embeddings is None or not len(store_chunks):
+        return []
+    query_embedding = query_embedding / query_norm
+    candidate_chunks = filter_chunks(store_chunks)
+    if not candidate_chunks:
+        return []
+    candidate_ids = {chunk["chunk_id"] for chunk in candidate_chunks}
+    candidate_indices = [
+        index for index, chunk in enumerate(store_chunks)
+        if chunk["chunk_id"] in candidate_ids
+    ]
+    candidate_embeddings = store_embeddings[candidate_indices]
+    crop = detect_crop(query_text) if query_text else None
+    if crop:
+        crop_mask = np.array([
+            store_chunks[index]["metadata"].get("crop") == crop
+            for index in candidate_indices
+        ])
+        if crop_mask.any():
+            candidate_indices = [
+                index for index, include in zip(candidate_indices, crop_mask) if include
+            ]
+            candidate_embeddings = store_embeddings[candidate_indices]
+    similarities = candidate_embeddings @ query_embedding
+    top_indices = np.argsort(-similarities)[:min(top_k, len(similarities))]
+    results = []
+    for index in top_indices:
+        result = store_chunks[candidate_indices[index]].copy()
+        result["similarity"] = float(similarities[index])
+        results.append(result)
+    return results
+
+
+chunks, chunk_embeddings = load_store()
+
+
+def retrieve(query_embedding, query_text=None, top_k=3):
+    return retrieve_from_store(
+        query_embedding, query_text=query_text, top_k=top_k,
+        store_chunks=chunks, store_embeddings=chunk_embeddings,
+    )
+import json
+import os
+
+import numpy as np
+
+
 # --------------------------------------------------
 # Paths
 # --------------------------------------------------

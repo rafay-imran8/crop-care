@@ -23,13 +23,6 @@ MIN_CHUNK_SIZE = 100
 
 
 # --------------------------------------------------
-# Load Documents
-# --------------------------------------------------
-with open(DOCS_FILE, "r", encoding="utf-8") as file:
-    documents = json.load(file)
-
-
-# --------------------------------------------------
 # Text Utilities
 # --------------------------------------------------
 def normalize_text(text: str) -> str:
@@ -288,55 +281,37 @@ def build_chunks_for_document(doc):
     return chunks
 
 
-# --------------------------------------------------
-# Build Chunks
-# --------------------------------------------------
-all_chunks = []
-chunk_id = 0
-
-for doc in documents:
-
-    document_chunks = build_chunks_for_document(doc)
-
-    for item in document_chunks:
-
-        text = item["text"].strip()
-
-        if len(text) < MIN_CHUNK_SIZE:
-            continue
-
-        metadata = doc["metadata"].copy()
-
-        metadata["page_start"] = metadata.pop("page")
-
-        metadata["page_end"] = metadata["page_start"]
-
-        if item["section"]:
-            metadata["section"] = item["section"]
-
-        all_chunks.append(
-            {
+def build_chunks(documents, starting_id=0):
+    all_chunks = []
+    chunk_id = starting_id
+    for doc in documents:
+        for item in build_chunks_for_document(doc):
+            text = item["text"].strip()
+            if len(text) < MIN_CHUNK_SIZE:
+                continue
+            metadata = doc["metadata"].copy()
+            metadata["page_start"] = metadata.pop("page")
+            metadata["page_end"] = metadata["page_start"]
+            if item["section"]:
+                metadata["section"] = item["section"]
+            all_chunks.append({
                 "chunk_id": chunk_id,
                 "text": text,
                 "metadata": metadata,
-            }
-        )
+            })
+            chunk_id += 1
+    return all_chunks
 
-        chunk_id += 1
+
+def save_chunks(chunks, output_file=OUTPUT_FILE):
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    with open(output_file, "w", encoding="utf-8") as file:
+        json.dump(chunks, file, ensure_ascii=False, indent=2)
 
 
-# --------------------------------------------------
-# Save
-# --------------------------------------------------
-with open(OUTPUT_FILE, "w", encoding="utf-8") as file:
-    json.dump(
-        all_chunks,
-        file,
-        ensure_ascii=False,
-        indent=2,
-    )
-
-print(
-    f"Saved {len(all_chunks)} semantic chunks "
-    f"to {OUTPUT_FILE}"
-)
+if __name__ == "__main__":
+    with open(DOCS_FILE, "r", encoding="utf-8") as file:
+        documents = json.load(file)
+    all_chunks = build_chunks(documents)
+    save_chunks(all_chunks)
+    print(f"Saved {len(all_chunks)} semantic chunks to {OUTPUT_FILE}")
