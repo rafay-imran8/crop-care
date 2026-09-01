@@ -79,6 +79,8 @@ phase1/train/*.ckpt
 
 # Data files (JSON, PDF) - keep folders with .gitkeep
 *.json
+!package-lock.json
+!package.json
 *.pdf
 
 # Evaluation outputs
